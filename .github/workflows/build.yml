@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-cuda-amazon-linux-docker:
-    name: Build in Amazon Linux Docker with CUDA
+  build-cuda-rocky-docker:
+    name: Build in Rocky Linux Docker with CUDA
     runs-on: ubuntu-latest
 
     steps:
@@ -25,12 +25,12 @@ jobs:
         run: |
           docker build --build-arg FFMPEG_VERSION=${{ env.FFMPEG_VERSION }} \
            --build-arg NVENC_VERSION=${{ env.NVENC_VERSION }} -t \
-           ffmpeg:cuda-amazonlinux -f cuda-amazon-linux.dockerfile .
+           ffmpeg:cuda-rocky -f cuda-rocky.dockerfile .
 
       - name: Copy Build
         run: |
           docker run --rm  -v ${{ github.workspace }}/artifacts:/app/artifacts \
-           ffmpeg:cuda-amazonlinux bash copyfiles.sh
+           ffmpeg:cuda-rocky bash copyfiles.sh
           sudo chmod -R 777 ${{ github.workspace }}/artifacts/
 
       - name: Upload Artifacts
@@ -41,7 +41,7 @@ jobs:
 
   publish_release:
     name: Publish Release
-    needs: build-cuda-amazon-linux-docker
+    needs: build-cuda-rocky-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
