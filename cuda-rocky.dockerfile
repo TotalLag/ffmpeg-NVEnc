@@ -45,5 +45,4 @@ RUN ldd /usr/bin/ffmpeg
 RUN ldd /usr/bin/ffprobe
 RUN ldd /usr/bin/ffplay
 
-CMD         ["--help"]
-ENTRYPOINT  ["/usr/bin/ffmpeg"]
+RUN /usr/bin/ffmpeg --help
