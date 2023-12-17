@@ -30,7 +30,7 @@ jobs:
       - name: Copy Build
         run: |
           docker run --rm -v ${{ github.workspace }}/artifacts:/app/artifacts \
-           -e VER=${{ matrix.os }} ffmpeg:cuda-rockylinux${{ matrix.os }} bash copyfiles.sh
+          -e VER=${{ matrix.os }} ffmpeg:cuda-rockylinux${{ matrix.os }} /bin/bash /app/artifacts/copyfiles.sh
           sudo chmod -R 777 ${{ github.workspace }}/artifacts/
 
       - name: Upload Artifacts
