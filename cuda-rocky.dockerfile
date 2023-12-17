@@ -29,11 +29,11 @@ RUN yum install -y libva \
     && yum clean all
 
 # Copy libnpp
-COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppc.so.11 /lib64/libnppc.so.11
-COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppig.so.11 /lib64/libnppig.so.11
-COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppicc.so.11 /lib64/libnppicc.so.11
-COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppidei.so.11 /lib64/libnppidei.so.11
-COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppif.so.11 /lib64/libnppif.so.11
+COPY --from=build /usr/local/cuda-12.3.1/targets/x86_64-linux/lib/libnppc.so.11 /lib64/libnppc.so.11
+COPY --from=build /usr/local/cuda-12.3.1/targets/x86_64-linux/lib/libnppig.so.11 /lib64/libnppig.so.11
+COPY --from=build /usr/local/cuda-12.3.1/targets/x86_64-linux/lib/libnppicc.so.11 /lib64/libnppicc.so.11
+COPY --from=build /usr/local/cuda-12.3.1/targets/x86_64-linux/lib/libnppidei.so.11 /lib64/libnppidei.so.11
+COPY --from=build /usr/local/cuda-12.3.1/targets/x86_64-linux/lib/libnppif.so.11 /lib64/libnppif.so.11
 
 # Copy ffmpeg
 COPY --from=build /app/workspace/bin/ffmpeg /usr/bin/ffmpeg
