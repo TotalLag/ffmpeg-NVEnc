@@ -1,6 +1,6 @@
 ARG VER=8
 
-FROM nvidia/cuda:11.7.0-devel-rockylinux${VER} AS build
+FROM nvidia/cuda:12.3.1-devel-rockylinux${VER} AS build
 
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,video
