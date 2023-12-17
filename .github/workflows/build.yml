@@ -4,16 +4,17 @@ on:
    workflow_dispatch:
 
 jobs:
-  build-cuda-rocky-docker:
-    name: Build in Rocky Linux Docker with CUDA
+
+  build-cuda-centos-docker:
+    name: build in centos docker with cuda
+    strategy:
+      matrix:
+        os: ['8', '7']  # Specify CentOS versions here
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout ffmpeg-NVEnc
+      - name: Checkout
         uses: actions/checkout@v3
-        with:
-          repository: divyam234/ffmpeg-NVEnc
-          path: ffmpeg-NVEnc # Checkout in a specific directory
 
       - name: Set Envs
         run: |
@@ -22,14 +23,14 @@ jobs:
 
       - name: Build FFmpeg
         run: |
-          docker build --build-arg FFMPEG_VERSION=${{ env.FFMPEG_VERSION }} \
+          docker build --build-arg VER=${{ matrix.os }} --build-arg FFMPEG_VERSION=${{ env.FFMPEG_VERSION }} \
            --build-arg NVENC_VERSION=${{ env.NVENC_VERSION }} -t \
-           ffmpeg:cuda-rocky8 -f ffmpeg-NVEnc/cuda-rocky.dockerfile .
+           ffmpeg:cuda-centos${{ matrix.os }} -f cuda-centos.dockerfile .
 
       - name: Copy Build
         run: |
-          docker run --rm  -v ${{ github.workspace }}/artifacts:/app/artifacts \
-           ffmpeg:cuda-rocky8 bash copyfiles.sh
+          docker run --rm -v ${{ github.workspace }}/artifacts:/app/artifacts \
+           -e VER=${{ matrix.os }} ffmpeg:cuda-centos${{ matrix.os }} bash copyfiles.sh
           sudo chmod -R 777 ${{ github.workspace }}/artifacts/
 
       - name: Upload Artifacts
@@ -40,7 +41,7 @@ jobs:
 
   publish_release:
     name: Publish Release
-    needs: build-cuda-rocky-docker
+    needs: build-cuda-centos-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
