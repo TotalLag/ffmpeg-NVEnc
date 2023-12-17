@@ -6,8 +6,8 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,video
 
 RUN yum group install -y "Development Tools" \
-    && yum install -y curl libva-devel libass-devel python3 \
-    && yum install -y meson ninja-build --enablerepo=powertools \
+    && yum install -y curl epel-release libva-devel python3 \
+    && yum install -y meson ninja-build libass-devel --enablerepo=powertools \
     && rm -rf /var/cache/yum/* /var/cache/dnf/* \
     && yum clean all \
     && alternatives --set python /usr/bin/python3
