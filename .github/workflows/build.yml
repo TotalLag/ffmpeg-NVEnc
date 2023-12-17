@@ -9,7 +9,7 @@ jobs:
     name: build in rocky linux docker with cuda
     strategy:
       matrix:
-        os: ['8', '7']  # Specify CentOS versions here
+        os: ['8', '9']  # Specify CentOS versions here
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Set Envs
         run: |
           echo "NVENC_VERSION=$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/rigaya/NVEnc/releases/latest | rev | cut -d '/' -f 1 | rev)" >> $GITHUB_ENV
-          echo "FFMPEG_VERSION=5.1" >> $GITHUB_ENV
+          echo "FFMPEG_VERSION=6.1" >> $GITHUB_ENV
 
       - name: Build FFmpeg
         run: |
@@ -56,7 +56,7 @@ jobs:
       - name: Set Envs
         run: |
           echo "NVENC_VERSION=$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/rigaya/NVEnc/releases/latest | rev | cut -d '/' -f 1 | rev)" >> $GITHUB_ENV
-          echo "FFMPEG_VERSION=5.1" >> $GITHUB_ENV
+          echo "FFMPEG_VERSION=6.1" >> $GITHUB_ENV
 
       - name: Delete Release
         run: gh release delete latest --cleanup-tag -y
