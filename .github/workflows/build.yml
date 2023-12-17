@@ -9,7 +9,7 @@ jobs:
     name: build in rocky linux docker with cuda
     strategy:
       matrix:
-        os: ['8', '9']  # Specify CentOS versions here
+        os: ['8']  # Specify CentOS versions here
     runs-on: ubuntu-latest
 
     steps:
