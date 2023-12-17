@@ -6,7 +6,7 @@ on:
 jobs:
 
   build-cuda-centos-docker:
-    name: build in centos docker with cuda
+    name: build in rocky linux docker with cuda
     strategy:
       matrix:
         os: ['8', '7']  # Specify CentOS versions here
@@ -25,12 +25,12 @@ jobs:
         run: |
           docker build --build-arg VER=${{ matrix.os }} --build-arg FFMPEG_VERSION=${{ env.FFMPEG_VERSION }} \
            --build-arg NVENC_VERSION=${{ env.NVENC_VERSION }} -t \
-           ffmpeg:cuda-centos${{ matrix.os }} -f cuda-centos.dockerfile .
+           ffmpeg:cuda-rockylinux${{ matrix.os }} -f cuda-rocky.dockerfile .
 
       - name: Copy Build
         run: |
           docker run --rm -v ${{ github.workspace }}/artifacts:/app/artifacts \
-           -e VER=${{ matrix.os }} ffmpeg:cuda-centos${{ matrix.os }} bash copyfiles.sh
+           -e VER=${{ matrix.os }} ffmpeg:cuda-rockylinux${{ matrix.os }} bash copyfiles.sh
           sudo chmod -R 777 ${{ github.workspace }}/artifacts/
 
       - name: Upload Artifacts
