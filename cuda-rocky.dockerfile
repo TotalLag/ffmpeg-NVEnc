@@ -42,6 +42,11 @@ COPY --from=build /app/workspace/bin/ffmpeg /usr/bin/ffmpeg
 COPY --from=build /app/workspace/bin/ffprobe /usr/bin/ffprobe
 COPY --from=build /app/workspace/bin/ffplay /usr/bin/ffplay
 
+WORKDIR /app
+COPY ./build-ffmpeg /app/build-ffmpeg
+COPY ./ldd.sh /app/ldd.sh
+COPY ./copyfiles.sh /app/copyfiles.sh
+
 # Check shared library
 RUN ldd /usr/bin/ffmpeg
 RUN ldd /usr/bin/ffprobe
