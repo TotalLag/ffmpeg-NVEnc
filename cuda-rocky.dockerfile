@@ -26,7 +26,7 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,video
 
 # install va-driver
-RUN yum install -y libva \
+RUN yum install -y libva xz-utils \
     && rm -rf /var/cache/yum/* \
     && yum clean all
 
