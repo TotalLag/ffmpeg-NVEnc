@@ -37,10 +37,15 @@ COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppicc.so.12 
 COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppidei.so.12 /lib64/libnppidei.so.12
 COPY --from=build /usr/local/cuda-12.3/targets/x86_64-linux/lib/libnppif.so.12 /lib64/libnppif.so.12
 
-# Copy ffmpeg
+# Copy ffmpeg, ffprobe, and ffplay
 COPY --from=build /app/workspace/bin/ffmpeg /usr/bin/ffmpeg
+COPY --from=build /app/workspace/bin/ffmpeg /app/workspace/bin/ffmpeg
+
 COPY --from=build /app/workspace/bin/ffprobe /usr/bin/ffprobe
+COPY --from=build /app/workspace/bin/ffprobe /app/workspace/bin/ffprobe
+
 COPY --from=build /app/workspace/bin/ffplay /usr/bin/ffplay
+COPY --from=build /app/workspace/bin/ffplay /app/workspace/bin/ffplay
 
 WORKDIR /app
 COPY ./build-ffmpeg /app/build-ffmpeg
