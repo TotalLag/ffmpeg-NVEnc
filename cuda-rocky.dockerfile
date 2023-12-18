@@ -14,6 +14,8 @@ RUN yum group install -y "Development Tools" \
 
 WORKDIR /app
 COPY ./build-ffmpeg /app/build-ffmpeg
+COPY ./ldd.sh /app/ldd.sh
+COPY ./copyfiles.sh /app/copyfiles.sh
 
 RUN SKIPINSTALL=yes /app/build-ffmpeg --build --enable-gpl-and-non-free
 
