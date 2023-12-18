@@ -47,6 +47,8 @@ COPY --from=build /app/workspace/bin/ffprobe /app/workspace/bin/ffprobe
 COPY --from=build /app/workspace/bin/ffplay /usr/bin/ffplay
 COPY --from=build /app/workspace/bin/ffplay /app/workspace/bin/ffplay
 
+COPY --from=build /app/workspace/bin/nvencc /app/workspace/bin/nvencc
+
 WORKDIR /app
 COPY ./build-ffmpeg /app/build-ffmpeg
 COPY ./ldd.sh /app/ldd.sh
